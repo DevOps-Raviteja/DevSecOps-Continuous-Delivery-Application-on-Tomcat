@@ -7,7 +7,7 @@ resource "aws_instance" "my_instance" {
     subnet_id = aws_subnet.my_subnet.id
     vpc_security_group_ids = [aws_security_group.my_security_group.id]
     tags = {Name = "Continuous Delivery"}
-    key_name = "access_pey"
+    key_name = "access_key"
 
     # Allocating Storage 
     root_block_device {
@@ -18,21 +18,14 @@ resource "aws_instance" "my_instance" {
     connection {
         type = "ssh"
         user = "ubuntu"
-        host = aws_instance.instance.public_ip
+        host = aws_instance.my_instance.public_ip
         private_key = tls_private_key.rsa.private_key_pem
-    }
-
-    # Copying Files into the Server    
-    provisioner "file" {
-        source = "installation_scripts"
-        destination = "/tmp/installation_scripts"
     }
 
     # Executing the Packages file
     provisioner "remote-exec" {
         inline = [
-            "chmod +x /tmp/installation_scripts/packages.sh",
-            "/tmp/installation_scripts/packages.sh",
+            "git clone https://github.com/Ravitejadarla5/shall-scripts.git",
         ]
     }
 }

@@ -39,3 +39,6 @@ backend.tf
 .terraform
 .terraform.lock.hcl
 .terraformrc
+
+### EC2_Instance Key ###
+access_key.pem
