@@ -55,7 +55,7 @@ pipeline {
         }
         stage('Dependency-Check'){
             steps{
-                dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP-Chech'
+                dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP-Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.html'
             }
         }
