@@ -29,6 +29,7 @@ pipeline {
         stage('Unit Test'){
             steps{
                 sh 'mvn test'
+                junit '**/target/surefire-reports/*.xml'
             }
         }
         stage('Sonar Analysis'){
