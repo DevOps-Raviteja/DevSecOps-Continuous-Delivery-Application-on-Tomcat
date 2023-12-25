@@ -51,6 +51,7 @@ pipeline {
         stage('Package Install'){
             steps{
                 sh 'mvn clean install'
+                archiveArtifacts artifacts: 'target/myapplication-0.0.1-SNAPSHOT.war', followSymlinks: false
             }
         }
         stage('Dependency-Check'){
