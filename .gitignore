@@ -33,4 +33,9 @@ build/
 .vscode/
 
 ### Terraform ###
+terraform.tfstate
+terraform.tfstate.backup
+backend.tf
 .terraform
+.terraform.lock.hcl
+.terraformrc
