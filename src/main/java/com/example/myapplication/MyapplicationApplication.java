@@ -1,18 +1,13 @@
-package com.vcjain.calculator;
+package com.example.myapplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CalculatorApplication {
+public class MyapplicationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CalculatorApplication.class, args);
-
-		try{
-			int i = 0;
-		}catch(Exception e){
-		}
+		SpringApplication.run(MyapplicationApplication.class, args);
 	}
 
 }

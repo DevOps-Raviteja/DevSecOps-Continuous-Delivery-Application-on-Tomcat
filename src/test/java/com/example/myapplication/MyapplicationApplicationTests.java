@@ -1,10 +1,10 @@
-package com.vcjain.calculator;
+package com.example.myapplication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CalculatorApplicationTests {
+class MyapplicationApplicationTests {
 
 	@Test
 	void contextLoads() {
