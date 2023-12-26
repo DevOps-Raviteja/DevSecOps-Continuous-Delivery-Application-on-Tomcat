@@ -61,5 +61,12 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.html'
             }
         }
+        stage('Deploy to Tomcat'){
+            steps{
+                sshagent(['tomcat-key']){
+                    sh 'scp -v -o StrictHostKeyChecking=no target/myapplication-0.0.1-SNAPSHOT.war ubuntu@54.165.96.106:/opt/tomcat/webapps'
+                }
+            }
+        }
     }
 }
