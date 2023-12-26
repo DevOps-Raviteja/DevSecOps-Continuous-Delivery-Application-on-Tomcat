@@ -52,7 +52,7 @@ pipeline {
         stage('Package Install'){
             steps{
                 sh 'mvn clean install'
-                archiveArtifacts artifacts: 'target/myapplication-0.0.1-SNAPSHOT.war', followSymlinks: false
+                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
             }
         }
         stage('Dependency-Check'){
@@ -64,7 +64,7 @@ pipeline {
         stage('Deploy to Tomcat'){
             steps{
                 sshagent(['tomcat-key']){
-                    sh 'scp -v -o StrictHostKeyChecking=no target/myapplication-0.0.1-SNAPSHOT.war ubuntu@54.165.96.106:/opt/tomcat/webapps'
+                    sh 'scp -v -o StrictHostKeyChecking=no target/*.war ubuntu@54.165.96.106:/opt/tomcat/webapps'
                 }
             }
         }
