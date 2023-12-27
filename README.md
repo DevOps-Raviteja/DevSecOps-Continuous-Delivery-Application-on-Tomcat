@@ -3,13 +3,13 @@ This is Project is about Continuous Inegration/ Continuous Delivery extends the 
 
 # Type of Tools that are involved in this Project
 -------------------------------------------------
-GitHub: /n
+# GitHub:
 GitHub uses Git, a distributed version control system, to track changes in code over time.
 
-Terraform:
+# Terraform:
 Terraform is an open-source infrastructure as code (IaC) tool This helps me To Automate my AWS Resources such as EX: EC2 Instance in Day-to-Day life.
 
-Jenkins:
+# Jenkins:
 Jenkins is a Open-source & automation server that facilitates Continuous Integraion Continuous Delivery. It allows me to automate work building, tasting, & deploying to the servers.
 
 
