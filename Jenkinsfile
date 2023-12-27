@@ -29,7 +29,7 @@ pipeline {
         stage('Unit Test'){
             steps{
                 sh 'mvn test'
-                // junit '**/target/surefire-reports/*.xml'
+                junit '**/target/surefire-reports/*.xml'
             }
         }
         stage('Sonar Analysis'){
@@ -55,16 +55,16 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
             }
         }
-        // stage('Dependency-Check'){
-        //     steps{
-        //         dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP-Check'
-        //         dependencyCheckPublisher pattern: '**/dependency-check-report.html'
-        //     }
-        // }
+        stage('Dependency-Check'){
+            steps{
+                dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.html'
+            }
+        }
         // stage('Deploy to Tomcat'){
         //     steps{
         //         sshagent(['tomcat-key']){
-        //             sh 'scp -v -o StrictHostKeyChecking=no target/*.war ubuntu@54.165.96.106:/opt/tomcat/webapps'
+        //             sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@54.165.96.106:/opt/tomcat/webapps'
         //         }
         //     }
         // }
