@@ -37,7 +37,7 @@ pipeline {
                 script{
                     withSonarQubeEnv(credentialId: 'sonar-token'){
                         sh 'mvn sonar:sonar'
-                        sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=webApplication -Dsonar.java.binaries=. -Dsonar.projectKey=webApplication"
+                        sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=petclinic -Dsonar.java.binaries=. -Dsonar.projectKey=petclinic"
                     }
                 }
             }
@@ -61,12 +61,17 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.html'
             }
         }
-        // stage('Deploy to Tomcat'){
-        //     steps{
-        //         sshagent(['tomcat-key']){
-        //             sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@54.165.96.106:/opt/tomcat/webapps'
-        //         }
-        //     }
-        // }
+        stage('Manual Approval Needed'){
+            steps{
+                input "Please Approve to Proceed with Deployment to Apache Tomcat"
+            }
+        }
+        stage('Deploy to Tomcat'){
+            steps{
+                sshagent(['tomcat-key']){
+                    sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@54.165.96.106:/opt/tomcat/webapps'
+                }
+            }
+        }
     }
 }
