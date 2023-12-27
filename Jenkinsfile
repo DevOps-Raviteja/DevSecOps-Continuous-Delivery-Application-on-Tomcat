@@ -32,29 +32,29 @@ pipeline {
                 // junit '**/target/surefire-reports/*.xml'
             }
         }
-        // stage('Sonar Analysis'){
-        //     steps{
-        //         script{
-        //             withSonarQubeEnv(credentialId: 'sonar-token'){
-        //                 sh 'mvn sonar:sonar'
-        //                 sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=webApplication -Dsonar.java.binaries=. -Dsonar.projectKey=webApplication"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Quality Gates'){
-        //     steps{
-        //         script{
-        //             waitForQualityGate abortPipeline:false, credentialsId: 'sonar-token'
-        //         }
-        //     }
-        // }
-        // stage('Package Install'){
-        //     steps{
-        //         sh 'mvn clean install'
-        //         archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
-        //     }
-        // }
+        stage('Sonar Analysis'){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialId: 'sonar-token'){
+                        sh 'mvn sonar:sonar'
+                        sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=webApplication -Dsonar.java.binaries=. -Dsonar.projectKey=webApplication"
+                    }
+                }
+            }
+        }
+        stage('Quality Gates'){
+            steps{
+                script{
+                    waitForQualityGate abortPipeline:false, credentialsId: 'sonar-token'
+                }
+            }
+        }
+        stage('Package Install'){
+            steps{
+                sh 'mvn clean install'
+                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+            }
+        }
         // stage('Dependency-Check'){
         //     steps{
         //         dependencyCheck additionalArguments: '--scan ./ --format HTML', odcInstallation: 'DP-Check'
